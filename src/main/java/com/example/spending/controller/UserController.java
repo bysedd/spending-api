@@ -20,18 +20,18 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserResponseDto>> findAll() {
-        return ResponseEntity.ok(userService.findAll());
+    public ResponseEntity<List<UserResponseDto>> read() {
+        return ResponseEntity.ok(userService.read());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<UserResponseDto>> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(Collections.singletonList(userService.findById(id)));
+    public ResponseEntity<List<UserResponseDto>> readById(@PathVariable Long id) {
+        return ResponseEntity.ok(Collections.singletonList(userService.readById(id)));
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> register(@RequestBody UserRequestDto dto) {
-        UserResponseDto user = userService.register(dto);
+    public ResponseEntity<UserResponseDto> create(@RequestBody UserRequestDto dto) {
+        UserResponseDto user = userService.create(dto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
