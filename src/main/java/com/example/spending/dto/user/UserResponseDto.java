@@ -17,5 +17,7 @@ public class UserResponseDto {
 
     private String photo;
 
+    private Date registerDate;
+
     private Date inactivationDate;
 }
