@@ -41,6 +41,16 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
         return mapper.map(user.get(), UserResponseDto.class);
     }
 
+    public UserResponseDto readByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+
+        if (user.isEmpty()) {
+            throw new ResourceNotFoundException("Unable to find user with email: " + email);
+        }
+
+        return mapper.map(user.get(), UserResponseDto.class);
+    }
+
     @Override
     public UserResponseDto create(UserRequestDto dto) {
         validateUser(dto);
