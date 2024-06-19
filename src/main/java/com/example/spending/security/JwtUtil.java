@@ -3,6 +3,8 @@ package com.example.spending.security;
 import com.example.spending.domain.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +19,8 @@ import java.util.Date;
 import static io.jsonwebtoken.security.Keys.hmacShaKeyFor;
 
 @Component
+@Getter
+@Setter
 public class JwtUtil {
 
     @Value("${auth.jwt.secret}")
@@ -64,10 +68,10 @@ public class JwtUtil {
     }
 
     /**
-     * Retrieves the email from a JWT token.
+     * Extracts the email from a JWT token.
      *
-     * @param token The JWT token from which to retrieve the email.
-     * @return The email is extracted from the JWT token or null if the token is invalid or cannot be parsed.
+     * @param token The JWT token to extract the email from.
+     * @return The email is extracted from the JWT token or null if there was an error parsing the token or the token is invalid.
      */
     public String getUsername(String token) {
         Claims claims = getClaims(token);
