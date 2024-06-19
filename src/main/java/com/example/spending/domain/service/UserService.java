@@ -24,16 +24,14 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
     private final ModelMapper mapper;
 
     @Override
-    public List<UserResponseDto> findAll() {
+    public List<UserResponseDto> read() {
         List<User> users = userRepository.findAll();
 
-        return users.stream()
-                .map(user -> mapper.map(user, UserResponseDto.class))
-                .collect(Collectors.toList());
+        return users.stream().map(user -> mapper.map(user, UserResponseDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public UserResponseDto findById(Long id) {
+    public UserResponseDto readById(Long id) {
         Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()) {
@@ -44,8 +42,14 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
     }
 
     @Override
-    public UserResponseDto register(UserRequestDto dto) {
+    public UserResponseDto create(UserRequestDto dto) {
         validateUser(dto);
+
+        Optional<User> optionalUser = userRepository.findByEmail(dto.getEmail());
+
+        if (optionalUser.isPresent()) {
+            throw new ResourceBadRequestException("There is already a registered user with the email: " + dto.getEmail());
+        }
 
         User user = mapper.map(dto, User.class);
         user.setId(null);
@@ -58,7 +62,7 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
 
     @Override
     public UserResponseDto update(Long id, UserRequestDto dto) {
-        UserResponseDto bankUser = findById(id);
+        UserResponseDto bankUser = readById(id);
         validateUser(dto);
 
         User user = mapper.map(dto, User.class);

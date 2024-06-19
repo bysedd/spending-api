@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface ICRUDService<Req, Res> {
 
-    List<Res> findAll();
+    Res create(Req dto);
 
-    Res findById(Long id);
+    List<Res> read();
 
-    Res register(Req dto);
+    Res readById(Long id);
 
     Res update(Long id, Req dto);
 
