@@ -2,7 +2,6 @@ package com.example.spending.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +14,7 @@ import java.util.List;
 @Setter
 @Entity
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
