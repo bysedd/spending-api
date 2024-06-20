@@ -1,5 +1,5 @@
 ### Create
-POST http://localhost:8080/api/users
+POST {{host}}/api/users
 Content-Type: application/json
 
 {
@@ -8,13 +8,13 @@ Content-Type: application/json
 }
 
 ### Read all
-GET http://localhost:8080/api/users
+GET {{host}}/api/users
 
 ### Read by id
-GET http://localhost:8080/api/users/3
+GET {{host}}/api/users/3
 
 ### Update by id
-PUT http://localhost:8080/api/users/4
+PUT {{host}}/api/users/4
 Content-Type: application/json
 
 {
@@ -24,4 +24,4 @@ Content-Type: application/json
 }
 
 ### Delete by id
-DELETE http://localhost:8080/api/users/3
+DELETE {{host}}/api/users/3
