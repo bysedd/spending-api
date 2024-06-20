@@ -8,6 +8,7 @@ import com.example.spending.dto.user.UserRequestDto;
 import com.example.spending.dto.user.UserResponseDto;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -22,6 +23,8 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
     private final UserRepository userRepository;
 
     private final ModelMapper mapper;
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<UserResponseDto> read() {
@@ -64,7 +67,7 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
         User user = mapper.map(dto, User.class);
         user.setId(null);
         user.setRegisterDate(new Date());
-        // TODO: Encrypt password
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         user = userRepository.save(user);
         return mapper.map(user, UserResponseDto.class);
@@ -76,8 +79,7 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
         validateUser(dto);
 
         User user = mapper.map(dto, User.class);
-        // TODO: Encrypt password
-
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setId(id);
         user.setInactivationDate(bankUser.getInactivationDate());
         user.setRegisterDate(bankUser.getRegisterDate());
