@@ -19,14 +19,13 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private final JwtUtil jwtUtil;
 
-    private final UserService userService;
+    private UserService userService;
 
     private ModelMapper mapper;
 
-    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserService userService) {
+    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         super(authenticationManager);
         this.jwtUtil = jwtUtil;
-        this.userService = userService;
     }
 
     @Override
