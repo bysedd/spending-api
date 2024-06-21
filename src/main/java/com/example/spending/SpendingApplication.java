@@ -10,14 +10,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpendingApplication {
 
-	/**
-	 * The main method is the entry point for running the Spending Application.
-	 * It initializes and starts the application.
-	 *
-	 * @param args an array of command-line arguments
-	 */
-	public static void main(String[] args) {
-		SpringApplication.run(SpendingApplication.class, args);
-	}
+  /**
+   * The main method is the entry point for running the Spending Application.
+   * It initializes and starts the application.
+   *
+   * @param args an array of command-line arguments
+   */
+  public static void main(String[] args) {
+    SpringApplication.run(SpendingApplication.class, args);
+  }
 
 }
