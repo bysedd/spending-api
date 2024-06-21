@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/users")
 @AllArgsConstructor
@@ -27,13 +27,13 @@ public class UserController {
   private final UserService userService;
 
   @GetMapping
-  public ResponseEntity<List<UserResponseDto>> read() {
-    return ResponseEntity.ok(userService.read());
+  public ResponseEntity<List<UserResponseDto>> getAll() {
+    return ResponseEntity.ok(userService.getAll());
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<List<UserResponseDto>> readById(@PathVariable Long id) {
-    return ResponseEntity.ok(Collections.singletonList(userService.readById(id)));
+  public ResponseEntity<List<UserResponseDto>> getById(@PathVariable Long id) {
+    return ResponseEntity.ok(Collections.singletonList(userService.getById(id)));
   }
 
   @PostMapping

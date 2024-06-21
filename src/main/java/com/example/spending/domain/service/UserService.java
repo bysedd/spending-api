@@ -19,37 +19,27 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserService implements ICRUDService<UserRequestDto, UserResponseDto> {
 
-  private final UserRepository userRepository;
+  private UserRepository userRepository;
 
-  private final ModelMapper mapper;
+  private ModelMapper mapper;
 
   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Override
-  public List<UserResponseDto> read() {
+  public List<UserResponseDto> getAll() {
     List<User> users = userRepository.findAll();
 
     return users.stream()
-            .map(user -> mapper.map(user, UserResponseDto.class))
-            .collect(Collectors.toList());
+        .map(user -> mapper.map(user, UserResponseDto.class))
+        .collect(Collectors.toList());
   }
 
   @Override
-  public UserResponseDto readById(Long id) {
+  public UserResponseDto getById(Long id) {
     Optional<User> user = userRepository.findById(id);
 
     if (user.isEmpty()) {
       throw new ResourceNotFoundException("Unable to find user with id: " + id);
-    }
-
-    return mapper.map(user.get(), UserResponseDto.class);
-  }
-
-  public UserResponseDto readByEmail(String email) {
-    Optional<User> user = userRepository.findByEmail(email);
-
-    if (user.isEmpty()) {
-      throw new ResourceNotFoundException("Unable to find user with email: " + email);
     }
 
     return mapper.map(user.get(), UserResponseDto.class);
@@ -63,7 +53,7 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
 
     if (optionalUser.isPresent()) {
       throw new ResourceBadRequestException(
-              "There is already a registered user with the email: " + dto.getEmail());
+          "There is already a registered user with the email: " + dto.getEmail());
     }
 
     User user = mapper.map(dto, User.class);
@@ -77,7 +67,7 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
 
   @Override
   public UserResponseDto update(Long id, UserRequestDto dto) {
-    UserResponseDto bankUser = readById(id);
+    UserResponseDto bankUser = getById(id);
     validateUser(dto);
 
     User user = mapper.map(dto, User.class);
