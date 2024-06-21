@@ -1,27 +1,26 @@
 package com.example.spending.domain.model;
 
+import static com.example.spending.common.DateConverter.convertDate;
+
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Date;
-
-import static com.example.spending.common.DateConverter.convertDate;
 
 @Getter
 @Setter
 @AllArgsConstructor
 public class ErrorResponse {
 
-    private String datetime;
+  private String datetime;
 
-    private Integer status;
+  private Integer status;
 
-    private String title;
+  private String title;
 
-    private String message;
+  private String message;
 
-    public void setDatetime(Date datetime) {
-        this.datetime = convertDate(datetime);
-    }
+  public void setDatetime(Date datetime) {
+    this.datetime = convertDate(datetime);
+  }
 }

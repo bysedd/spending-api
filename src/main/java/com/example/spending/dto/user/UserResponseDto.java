@@ -1,23 +1,22 @@
 package com.example.spending.dto.user;
 
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter
 public class UserResponseDto {
 
-    private Long id;
+  private Long id;
 
-    private String name;
+  private String name;
 
-    private String email;
+  private String email;
 
-    private String photo;
+  private String photo;
 
-    private Date registerDate;
+  private Date registerDate;
 
-    private Date inactivationDate;
+  private Date inactivationDate;
 }

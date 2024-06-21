@@ -7,11 +7,11 @@ import lombok.Setter;
 @Setter
 public class UserRequestDto {
 
-    private String name;
+  private String name;
 
-    private String email;
+  private String email;
 
-    private String password;
+  private String password;
 
-    private String photo;
+  private String photo;
 }

@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface ICRUDService<Req, Res> {
 
-    Res create(Req dto);
+  Res create(Req dto);
 
-    List<Res> read();
+  List<Res> read();
 
-    Res readById(Long id);
+  Res readById(Long id);
 
-    Res update(Long id, Req dto);
+  Res update(Long id, Req dto);
 
-    void delete(Long id);
+  void delete(Long id);
 }
