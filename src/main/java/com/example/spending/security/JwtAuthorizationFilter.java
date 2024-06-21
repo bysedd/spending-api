@@ -56,27 +56,3 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
