@@ -15,44 +15,41 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
   private final JwtUtil jwtUtil;
 
-  private final UserDetailsSecurityServer userService;
+  private final UserDetailsSecurityServer userDetailsSecurityServer;
 
   public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil,
-          UserDetailsSecurityServer userService) {
+      UserDetailsSecurityServer userDetailsSecurityServer) {
     super(authenticationManager);
     this.jwtUtil = jwtUtil;
-    this.userService = userService;
+    this.userDetailsSecurityServer = userDetailsSecurityServer;
   }
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-          FilterChain chain) throws IOException, ServletException {
+      FilterChain chain) throws IOException, ServletException {
     String header = request.getHeader("Authorization");
 
-    if (header == null || !header.startsWith("Bearer ")) {
-      return;
-    }
+    if (header != null && header.startsWith("Bearer ")) {
+      UsernamePasswordAuthenticationToken auth = getAuthentication(header.substring(7));
 
-    String token = header.substring(7);
-    UsernamePasswordAuthenticationToken auth = getAuthentication(token);
-
-    if (auth != null && auth.isAuthenticated()) {
-      SecurityContextHolder.getContext()
-              .setAuthentication(auth);
+      if (auth != null && auth.isAuthenticated()) {
+        SecurityContextHolder.getContext().setAuthentication(auth);
+      }
     }
 
     chain.doFilter(request, response);
   }
 
   private UsernamePasswordAuthenticationToken getAuthentication(String token) {
-    if (!jwtUtil.validateToken(token)) {
-      return null;
+    if (jwtUtil.validateToken(token)) {
+
+      String email = jwtUtil.getUsername(token);
+
+      User user = (User) userDetailsSecurityServer.loadUserByUsername(email);
+
+      return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
     }
 
-    String email = jwtUtil.getUsername(token);
-
-    User user = (User) userService.loadUserByUsername(email);
-
-    return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+    return null;
   }
 }
