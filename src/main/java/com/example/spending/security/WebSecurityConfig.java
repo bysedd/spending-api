@@ -30,7 +30,7 @@ public class WebSecurityConfig {
 
   @Bean
   public AuthenticationManager authenticationManager(
-          AuthenticationConfiguration authenticationConfiguration) throws Exception {
+      AuthenticationConfiguration authenticationConfiguration) throws Exception {
     return authenticationConfiguration.getAuthenticationManager();
   }
 
@@ -50,11 +50,11 @@ public class WebSecurityConfig {
                     SessionCreationPolicy.STATELESS));
 
     http.addFilter(
-            new JwtAuthenticationFilter(authenticationManager(authenticationConfiguration),
-                    jwtUtil));
+        new JwtAuthenticationFilter(authenticationManager(authenticationConfiguration),
+            jwtUtil));
     http.addFilter(
-            new JwtAuthorizationFilter(authenticationManager(authenticationConfiguration), jwtUtil,
-                    userService));
+        new JwtAuthorizationFilter(authenticationManager(authenticationConfiguration), jwtUtil,
+            userService));
 
     return http.build();
   }
