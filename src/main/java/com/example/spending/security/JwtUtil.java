@@ -9,17 +9,12 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import javax.crypto.SecretKey;
-import lombok.Getter;
-import lombok.Setter;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 @Component
-@Getter
-@Setter
 public class JwtUtil {
 
   @Value("${auth.jwt.secret}")
@@ -27,6 +22,11 @@ public class JwtUtil {
 
   @Value("${auth.jwt.expiration}")
   private long jwtExpirationMs;
+
+  private void log(String message, Exception e) {
+    Logger logger = org.slf4j.LoggerFactory.getLogger(JwtUtil.class);
+    logger.error(message, e);
+  }
 
   /**
    * Generates a JWT token for the provided authentication.
@@ -42,14 +42,13 @@ public class JwtUtil {
       Key secretKey = hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
 
       return Jwts.builder()
-              .subject(user.getUsername())
-              .issuedAt(new Date())
-              .expiration(expirationDate)
-              .signWith(secretKey)
-              .compact();
+          .subject(user.getUsername())
+          .issuedAt(new Date())
+          .expiration(expirationDate)
+          .signWith(secretKey)
+          .compact();
     } catch (Exception e) {
-      Logger logger = org.slf4j.LoggerFactory.getLogger(JwtUtil.class);
-      logger.error("Error generating JWT token", e);
+      log("Error generating JWT token", e);
       return null;
     }
   }
@@ -65,13 +64,12 @@ public class JwtUtil {
     try {
       SecretKey secretKey = hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
       return Jwts.parser()
-              .verifyWith(secretKey)
-              .build()
-              .parseSignedClaims(token)
-              .getPayload();
+          .verifyWith(secretKey)
+          .build()
+          .parseSignedClaims(token)
+          .getPayload();
     } catch (Exception e) {
-      Logger logger = LoggerFactory.getLogger(JwtUtil.class);
-      logger.error("Error parsing JWT token", e);
+      log("Error parsing JWT token", e);
       return null;
     }
   }
@@ -108,7 +106,7 @@ public class JwtUtil {
 
     String email = claims.getSubject();
     boolean isTokenExpired = claims.getExpiration()
-            .before(new Date());
+        .before(new Date());
 
     return email != null && !isTokenExpired;
   }
