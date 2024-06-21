@@ -1,13 +1,10 @@
 package com.example.spending.security;
 
 import com.example.spending.domain.model.User;
-import com.example.spending.domain.service.UserService;
-import com.example.spending.dto.user.UserResponseDto;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,13 +16,12 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private final JwtUtil jwtUtil;
 
-    private UserService userService;
+    private final UserDetailsSecurityServer userService;
 
-    private ModelMapper mapper;
-
-    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserDetailsSecurityServer userService) {
         super(authenticationManager);
         this.jwtUtil = jwtUtil;
+        this.userService = userService;
     }
 
     @Override
@@ -48,8 +44,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         if (!jwtUtil.validateToken(token)) return null;
 
         String email = jwtUtil.getUsername(token);
-        UserResponseDto userDto = userService.readByEmail(email);
-        User user = mapper.map(userDto, User.class);
+
+        User user = (User) userService.loadUserByUsername(email);
 
         return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
     }

@@ -26,8 +26,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private final JwtUtil jwtUtil;
 
-    private final ModelMapper mapper = new ModelMapper();
-
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         super();
         this.authenticationManager = authenticationManager;
@@ -54,7 +52,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         User user = (User) authResult.getPrincipal();
         String token = jwtUtil.generateToken((Authentication) user);
 
-        UserResponseDto userResponse = mapper.map(user, UserResponseDto.class);
+        UserResponseDto userResponse = new ModelMapper().map(user, UserResponseDto.class);
 
         LoginResponseDto loginResponse = new LoginResponseDto();
         loginResponse.setToken("Bearer " + token);

@@ -19,9 +19,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @AllArgsConstructor
 public class WebSecurityConfig {
 
-    private JwtUtil jwtUtil;
-
-    private AuthenticationConfiguration authenticationConfiguration;
+    private final UserDetailsSecurityServer userService;
+    private final JwtUtil jwtUtil;
+    private final AuthenticationConfiguration authenticationConfiguration;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -38,7 +38,7 @@ public class WebSecurityConfig {
         http.headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::deny)).cors(AbstractHttpConfigurer::disable).csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(authorizeRequests -> authorizeRequests.requestMatchers(HttpMethod.POST, "/api/users").permitAll().anyRequest().authenticated()).sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilter(new JwtAuthenticationFilter(authenticationManager(authenticationConfiguration), jwtUtil));
-        http.addFilter(new JwtAuthorizationFilter(authenticationManager(authenticationConfiguration), jwtUtil));
+        http.addFilter(new JwtAuthorizationFilter(authenticationManager(authenticationConfiguration), jwtUtil, userService));
 
         return http.build();
     }
