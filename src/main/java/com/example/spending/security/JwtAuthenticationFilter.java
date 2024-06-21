@@ -42,6 +42,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
       UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
           login.getEmail(), login.getPassword());
       return authenticationManager.authenticate(authToken);
+
     } catch (BadCredentialsException e) {
       throw new BadCredentialsException("Invalid email or password");
     } catch (Exception e) {
@@ -52,8 +53,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   @Override
   protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
       FilterChain chain, Authentication authResult) throws IOException {
+
     User user = (User) authResult.getPrincipal();
-    String token = jwtUtil.generateToken((Authentication) user);
+    String token = jwtUtil.generateToken(authResult);
 
     UserResponseDto userResponse = new ModelMapper().map(user, UserResponseDto.class);
 
