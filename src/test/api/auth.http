@@ -1,8 +1,8 @@
-### Create
+### Auth user
 POST {{host}}/api/auth
 Content-Type: application/json
 
 {
-  "email": "johndoe@email.com",
+  "email": "admin@gmail.com",
   "password": "123456"
 }
