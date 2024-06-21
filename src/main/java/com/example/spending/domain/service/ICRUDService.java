@@ -6,9 +6,9 @@ public interface ICRUDService<Req, Res> {
 
   Res create(Req dto);
 
-  List<Res> read();
+  List<Res> getAll();
 
-  Res readById(Long id);
+  Res getById(Long id);
 
   Res update(Long id, Req dto);
 
