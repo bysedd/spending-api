@@ -58,16 +58,12 @@ public class JwtUtil {
    *
    * @param token The JWT token to parse and extract the claims from.
    * @return The claims (payload) are parsed from the JWT token, or null if there was an error
-   * parsing the token.
+   *     parsing the token.
    */
   private Claims getClaims(String token) {
     try {
       SecretKey secretKey = hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
-      return Jwts.parser()
-          .verifyWith(secretKey)
-          .build()
-          .parseSignedClaims(token)
-          .getPayload();
+      return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
     } catch (Exception e) {
       log("Error parsing JWT token", e);
       return null;
@@ -79,7 +75,7 @@ public class JwtUtil {
    *
    * @param token The JWT token to extract the email from.
    * @return The email is extracted from the JWT token or null if there was an error parsing the
-   * token or the token is invalid.
+   *     token or the token is invalid.
    */
   public String getUsername(String token) {
     Claims claims = getClaims(token);
@@ -105,8 +101,7 @@ public class JwtUtil {
     }
 
     String email = claims.getSubject();
-    boolean isTokenExpired = claims.getExpiration()
-        .before(new Date());
+    boolean isTokenExpired = claims.getExpiration().before(new Date());
 
     return email != null && !isTokenExpired;
   }

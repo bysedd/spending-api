@@ -42,7 +42,7 @@ public class User implements UserDetails {
   @OneToMany(mappedBy = "user")
   private List<Title> titles;
 
-  //#region Framework
+  // #region Framework
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return List.of();
@@ -78,5 +78,5 @@ public class User implements UserDetails {
     return true;
   }
 
-  //#endregion
+  // #endregion
 }

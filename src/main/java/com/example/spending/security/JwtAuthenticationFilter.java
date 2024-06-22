@@ -34,13 +34,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   }
 
   @Override
-  public Authentication attemptAuthentication(HttpServletRequest request,
-      HttpServletResponse response) {
+  public Authentication attemptAuthentication(
+      HttpServletRequest request, HttpServletResponse response) {
     try {
-      LoginRequestDto login = new ObjectMapper().readValue(request.getInputStream(),
-          LoginRequestDto.class);
-      UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-          login.getEmail(), login.getPassword());
+      LoginRequestDto login =
+          new ObjectMapper().readValue(request.getInputStream(), LoginRequestDto.class);
+      UsernamePasswordAuthenticationToken authToken =
+          new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword());
       return authenticationManager.authenticate(authToken);
 
     } catch (BadCredentialsException e) {
@@ -51,8 +51,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   }
 
   @Override
-  protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-      FilterChain chain, Authentication authResult) throws IOException {
+  protected void successfulAuthentication(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      FilterChain chain,
+      Authentication authResult)
+      throws IOException {
 
     User user = (User) authResult.getPrincipal();
     String token = jwtUtil.generateToken(authResult);
@@ -67,15 +71,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     response.setContentType("application/json");
     response.setStatus(HttpServletResponse.SC_OK);
 
-    response.getWriter()
-        .write(new Gson().toJson(loginResponse));
+    response.getWriter().write(new Gson().toJson(loginResponse));
   }
 
   @Override
-  protected void unsuccessfulAuthentication(HttpServletRequest request,
-      HttpServletResponse response, AuthenticationException failed) throws IOException {
+  protected void unsuccessfulAuthentication(
+      HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)
+      throws IOException {
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-    response.getWriter()
-        .write(failed.getMessage());
+    response.getWriter().write(failed.getMessage());
   }
 }

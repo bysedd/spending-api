@@ -16,7 +16,7 @@ public class RestExceptionHandler {
 
   @ExceptionHandler(ResourceNotFoundException.class)
   public ResponseEntity<ErrorResponse> handlerResourceNotFoundException(
-          ResourceNotFoundException ex) {
+      ResourceNotFoundException ex) {
     String datetime = convertDate(new Date());
     ErrorResponse error = new ErrorResponse(datetime, 404, "Resource Not Found", ex.getMessage());
     return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
@@ -24,7 +24,7 @@ public class RestExceptionHandler {
 
   @ExceptionHandler(ResourceBadRequestException.class)
   public ResponseEntity<ErrorResponse> handlerResourceBadRequestException(
-          ResourceBadRequestException ex) {
+      ResourceBadRequestException ex) {
     String datetime = convertDate(new Date());
     ErrorResponse error = new ErrorResponse(datetime, 400, "Bad Request", ex.getMessage());
     return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
@@ -33,29 +33,8 @@ public class RestExceptionHandler {
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ErrorResponse> handlerException(Exception ex) {
     String datetime = convertDate(new Date());
-    ErrorResponse error = new ErrorResponse(datetime, 500, "Internal Server Error",
-            ex.getMessage());
+    ErrorResponse error =
+        new ErrorResponse(datetime, 500, "Internal Server Error", ex.getMessage());
     return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

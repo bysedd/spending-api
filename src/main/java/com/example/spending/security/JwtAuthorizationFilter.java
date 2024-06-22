@@ -17,7 +17,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
   private final UserDetailsSecurityServer userDetailsSecurityServer;
 
-  public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil,
+  public JwtAuthorizationFilter(
+      AuthenticationManager authenticationManager,
+      JwtUtil jwtUtil,
       UserDetailsSecurityServer userDetailsSecurityServer) {
     super(authenticationManager);
     this.jwtUtil = jwtUtil;
@@ -25,8 +27,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
   }
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-      FilterChain chain) throws IOException, ServletException {
+  protected void doFilterInternal(
+      HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+      throws IOException, ServletException {
     String header = request.getHeader("Authorization");
 
     if (header != null && header.startsWith("Bearer ")) {
