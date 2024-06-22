@@ -15,9 +15,7 @@ public class Title {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne
-  private User user;
+  @ManyToOne private User user;
 
-  @ManyToMany
-  private List<CostCenter> cost_center;
+  @ManyToMany private List<CostCenter> cost_center;
 }
