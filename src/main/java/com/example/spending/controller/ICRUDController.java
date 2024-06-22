@@ -21,8 +21,7 @@ public interface ICRUDController<Req, Res> {
   ResponseEntity<Res> create(@RequestBody Req dto);
 
   @PutMapping("/{id}")
-  ResponseEntity<Res> update(
-      @PathVariable Long id, @RequestBody Req dto);
+  ResponseEntity<Res> update(@PathVariable Long id, @RequestBody Req dto);
 
   @DeleteMapping("/{id}")
   ResponseEntity<?> delete(@PathVariable Long id);

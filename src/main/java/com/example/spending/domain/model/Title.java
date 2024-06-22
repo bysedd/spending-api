@@ -34,8 +34,7 @@ public class Title {
   @JoinTable(
       name = "title_cost_center",
       joinColumns = @JoinColumn(name = "title_id"),
-      inverseJoinColumns = @JoinColumn(name = "cost_center_id")
-  )
+      inverseJoinColumns = @JoinColumn(name = "cost_center_id"))
   private List<CostCenter> cost_center;
 
   @Column(nullable = false)

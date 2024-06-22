@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class CostCenterService implements
-    ICRUDService<CostCenterRequestDto, CostCenterResponseDto> {
+public class CostCenterService
+    implements ICRUDService<CostCenterRequestDto, CostCenterResponseDto> {
 
   private CostCenterRepository costCenterRepository;
 
@@ -54,8 +54,8 @@ public class CostCenterService implements
     Optional<CostCenter> optionalCostCenter = costCenterRepository.findById(id);
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-    if (optionalCostCenter.isEmpty() || !Objects.equals(optionalCostCenter.get().getUser().getId(),
-        user.getId())) {
+    if (optionalCostCenter.isEmpty()
+        || !Objects.equals(optionalCostCenter.get().getUser().getId(), user.getId())) {
       throw new ResourceNotFoundException("Unable to find cost center with id: " + id);
     }
 

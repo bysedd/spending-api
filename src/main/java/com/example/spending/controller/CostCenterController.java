@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/cost-center")
 @AllArgsConstructor
-public class CostCenterController implements
-    ICRUDController<CostCenterRequestDto, CostCenterResponseDto> {
+public class CostCenterController
+    implements ICRUDController<CostCenterRequestDto, CostCenterResponseDto> {
 
   private CostCenterService costCenterService;
 
