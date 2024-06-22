@@ -22,7 +22,7 @@ public class CostCenter {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id_cost_center")
+  @Column(name = "cost_center_id")
   private Long id;
 
   @Column(nullable = false)
