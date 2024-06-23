@@ -1,4 +1,4 @@
-package com.example.spending.dto.custcenter;
+package com.example.spending.dto.cost_center;
 
 import lombok.Getter;
 import lombok.Setter;
