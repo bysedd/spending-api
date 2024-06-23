@@ -1,8 +1,8 @@
 package com.example.spending.controller;
 
 import com.example.spending.domain.service.CostCenterService;
-import com.example.spending.dto.custcenter.CostCenterRequestDto;
-import com.example.spending.dto.custcenter.CostCenterResponseDto;
+import com.example.spending.dto.cost_center.CostCenterRequestDto;
+import com.example.spending.dto.cost_center.CostCenterResponseDto;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/cost-center")
+@RequestMapping("/api/cost-centers")
 @AllArgsConstructor
 public class CostCenterController
     implements ICRUDController<CostCenterRequestDto, CostCenterResponseDto> {

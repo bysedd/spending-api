@@ -4,8 +4,8 @@ import com.example.spending.domain.exception.ResourceNotFoundException;
 import com.example.spending.domain.model.CostCenter;
 import com.example.spending.domain.model.User;
 import com.example.spending.domain.repository.CostCenterRepository;
-import com.example.spending.dto.custcenter.CostCenterRequestDto;
-import com.example.spending.dto.custcenter.CostCenterResponseDto;
+import com.example.spending.dto.cost_center.CostCenterRequestDto;
+import com.example.spending.dto.cost_center.CostCenterResponseDto;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -25,10 +25,10 @@ public class CostCenterService
 
   @Override
   public CostCenterResponseDto create(CostCenterRequestDto dto) {
-    return getCostCenterResponseDto(dto, null);
+    return getResponseDto(dto, null);
   }
 
-  private CostCenterResponseDto getCostCenterResponseDto(CostCenterRequestDto dto, Long id) {
+  private CostCenterResponseDto getResponseDto(CostCenterRequestDto dto, Long id) {
     CostCenter costCenter = mapper.map(dto, CostCenter.class);
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -66,7 +66,7 @@ public class CostCenterService
   public CostCenterResponseDto update(Long id, CostCenterRequestDto dto) {
     getById(id);
 
-    return getCostCenterResponseDto(dto, id);
+    return getResponseDto(dto, id);
   }
 
   @Override

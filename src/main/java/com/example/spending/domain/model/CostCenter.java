@@ -35,7 +35,7 @@ public class CostCenter {
   @JoinColumn(name = "user_id")
   private User user;
 
-  @ManyToMany(mappedBy = "cost_center")
+  @ManyToMany(mappedBy = "costCenter")
   @JsonBackReference
   private List<Title> titles;
 }

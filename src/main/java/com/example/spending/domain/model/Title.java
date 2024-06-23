@@ -12,8 +12,12 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import java.util.Date;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Title {
 
   @Id
@@ -35,7 +39,7 @@ public class Title {
       name = "title_cost_center",
       joinColumns = @JoinColumn(name = "title_id"),
       inverseJoinColumns = @JoinColumn(name = "cost_center_id"))
-  private List<CostCenter> cost_center;
+  private List<CostCenter> costCenter;
 
   @Column(nullable = false)
   private double value;
