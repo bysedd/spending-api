@@ -29,7 +29,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     title.setUser(user);
-    title.setId(null);
+    title.setId(id);
 
     Title savedTitle = titleRepository.save(title);
 
