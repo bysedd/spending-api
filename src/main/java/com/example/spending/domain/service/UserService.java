@@ -68,9 +68,14 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
   @Override
   public UserResponseDto update(Long id, UserRequestDto dto) {
     UserResponseDto bankUser = getById(id);
-    validateUser(dto);
 
+    if (bankUser.getInactivationDate() != null) {
+      throw new ResourceBadRequestException("User inactivated cannot be updated");
+    }
+
+    validateUser(dto);
     User user = mapper.map(dto, User.class);
+
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
     user.setId(id);
     user.setInactivationDate(bankUser.getInactivationDate());
