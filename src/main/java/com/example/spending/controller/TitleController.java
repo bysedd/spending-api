@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/titles")
 @AllArgsConstructor
-public class TitleController
-    implements ICRUDController<TitleRequestDto, TitleResponseDto> {
+public class TitleController implements ICRUDController<TitleRequestDto, TitleResponseDto> {
 
   private TitleService titleService;
 
