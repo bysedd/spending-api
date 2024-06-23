@@ -28,7 +28,7 @@ public class CostCenterService
     return getResponseDto(dto, null);
   }
 
-  public CostCenterResponseDto getResponseDto(CostCenterRequestDto dto, Long id) {
+  private CostCenterResponseDto getResponseDto(CostCenterRequestDto dto, Long id) {
     CostCenter costCenter = mapper.map(dto, CostCenter.class);
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

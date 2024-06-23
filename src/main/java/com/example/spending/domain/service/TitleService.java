@@ -24,7 +24,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
 
   private ModelMapper mapper;
 
-  public TitleResponseDto getResponseDto(TitleRequestDto dto, Long id) {
+  private TitleResponseDto getResponseDto(TitleRequestDto dto, Long id) {
     Title title = mapper.map(dto, Title.class);
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
