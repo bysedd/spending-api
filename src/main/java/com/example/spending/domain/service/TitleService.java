@@ -30,7 +30,9 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
 
     title.setUser(user);
     title.setId(id);
-
+    if (id == null) {
+      title.setRegisterDate(new Date());
+    }
     Title savedTitle = titleRepository.save(title);
 
     return mapper.map(savedTitle, TitleResponseDto.class);
