@@ -17,7 +17,7 @@ public class TitleResponseDto {
 
   private ETitleType type;
 
-  private List<CostCenterResponseDto> cost_center;
+  private List<CostCenterResponseDto> costCenter;
 
   private double value;
 

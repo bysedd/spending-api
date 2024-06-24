@@ -17,7 +17,7 @@ public class TitleRequestDto {
 
   private ETitleType type;
 
-  private List<CostCenterRequestDto> cost_center;
+  private List<CostCenterRequestDto> costCenter;
 
   private double value;
 
