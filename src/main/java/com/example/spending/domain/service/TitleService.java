@@ -49,9 +49,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     List<Title> titles = titleRepository.findByUser(user);
 
-    return titles.stream()
-        .map(title -> mapper.map(title, TitleResponseDto.class))
-        .toList();
+    return titles.stream().map(title -> mapper.map(title, TitleResponseDto.class)).toList();
   }
 
   @Override
