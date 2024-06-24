@@ -77,20 +77,28 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
     titleRepository.deleteById(id);
   }
 
+  public List<TitleResponseDto> getByDueDate(String firstPeriod, String finalPeriod) {
+    List<Title> titles = titleRepository.getCashFlowByDueDate(firstPeriod, finalPeriod);
+
+    return titles.stream()
+        .map(title -> mapper.map(title, TitleResponseDto.class))
+        .collect(Collectors.toList());
+  }
+
   private void validateTitle(TitleRequestDto dto) {
     if (dto.getType() == null) {
-      throw new ResourceBadRequestException("Type is required");
+      throw new ResourceBadRequestException("type is required");
     } else if (dto.getDescription() == null || dto.getDescription().isBlank()) {
-      throw new ResourceBadRequestException("Description is required");
+      throw new ResourceBadRequestException("description is required");
     } else if (dto.getValue() <= 0) {
-      throw new ResourceBadRequestException("Value is required");
+      throw new ResourceBadRequestException("value is required");
     } else if (dto.getDueDate() == null) {
-      throw new ResourceBadRequestException("Due date is required");
+      throw new ResourceBadRequestException("dueDate is required");
     }
 
     Date now = new Date();
     if (dto.getDueDate().before(now)) {
-      throw new ResourceBadRequestException("Due date must be greater than the current date");
+      throw new ResourceBadRequestException("dueDate must be greater than the current date");
     }
   }
 }
