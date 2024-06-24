@@ -42,7 +42,8 @@ public class CostCenterService
 
   @Override
   public List<CostCenterResponseDto> getAll() {
-    List<CostCenter> costCenters = costCenterRepository.findAll();
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    List<CostCenter> costCenters = costCenterRepository.findByUser(user);
 
     return costCenters.stream()
         .map(costCenter -> mapper.map(costCenter, CostCenterResponseDto.class))

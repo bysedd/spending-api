@@ -46,18 +46,18 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
 
   @Override
   public List<TitleResponseDto> getAll() {
-    List<Title> titles = titleRepository.findAll();
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    List<Title> titles = titleRepository.findByUser(user);
 
-    return titles.stream()
-        .map(title -> mapper.map(title, TitleResponseDto.class))
-        .collect(Collectors.toList());
+    return titles.stream().map(title -> mapper.map(title, TitleResponseDto.class)).toList();
   }
 
   @Override
   public TitleResponseDto getById(Long id) {
     Optional<Title> optionalTitle = titleRepository.findById(id);
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-    if (optionalTitle.isEmpty()) {
+    if (optionalTitle.isEmpty() || !optionalTitle.get().getUser().getId().equals(user.getId())) {
       throw new ResourceNotFoundException("Unable to find title with id: " + id);
     }
 
