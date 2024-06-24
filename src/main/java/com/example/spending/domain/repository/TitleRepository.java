@@ -8,8 +8,10 @@ import org.springframework.data.repository.query.Param;
 
 public interface TitleRepository extends JpaRepository<Title, Long> {
 
-  @Query(nativeQuery = true,
-      value = """
+  @Query(
+      nativeQuery = true,
+      value =
+          """
           SELECT *
           FROM public.title
           WHERE due_date
@@ -17,7 +19,5 @@ public interface TitleRepository extends JpaRepository<Title, Long> {
                     AND to_timestamp(:finalPeriod, 'YYYY-MM-DD HH24:MI:SS');
                    \s""")
   List<Title> getCashFlowByDueDate(
-      @Param("firstPeriod") String firstPeriod,
-      @Param("finalPeriod") String finalPeriod
-  );
+      @Param("firstPeriod") String firstPeriod, @Param("finalPeriod") String finalPeriod);
 }

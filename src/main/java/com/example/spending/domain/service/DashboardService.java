@@ -34,11 +34,6 @@ public class DashboardService {
     double balance = totalReceivable - totalPayable;
 
     return new DashboardResponseDto(
-        totalReceivable,
-        totalPayable,
-        balance,
-        titlesReceivable,
-        titlesPayable
-    );
+        totalReceivable, totalPayable, balance, titlesReceivable, titlesPayable);
   }
 }

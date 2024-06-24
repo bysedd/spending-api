@@ -20,9 +20,7 @@ public class DashboardController {
 
   @GetMapping
   public ResponseEntity<DashboardResponseDto> getCashFlow(
-      @RequestParam String firstPeriod,
-      @RequestParam String finalPeriod
-  ) {
+      @RequestParam String firstPeriod, @RequestParam String finalPeriod) {
     return ResponseEntity.ok(dashboardService.getCashFlow(firstPeriod, finalPeriod));
   }
 }
