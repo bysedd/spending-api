@@ -1,12 +1,12 @@
 package com.example.spending.domain.model;
 
-import static com.example.spending.common.DateConverter.convertDate;
-
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Represents an error response returned by the server.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,7 +20,4 @@ public class ErrorResponse {
 
   private String message;
 
-  public void setDatetime(Date datetime) {
-    this.datetime = convertDate(datetime);
-  }
 }
