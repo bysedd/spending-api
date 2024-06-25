@@ -58,7 +58,7 @@ public class JwtUtil {
    *
    * @param token The JWT token to parse and extract the claims from.
    * @return The claims (payload) are parsed from the JWT token, or null if there was an error
-   * parsing the token.
+   *     parsing the token.
    */
   private Claims getClaims(String token) {
     try {
@@ -75,7 +75,7 @@ public class JwtUtil {
    *
    * @param token The JWT token to extract the email from.
    * @return The email is extracted from the JWT token or null if there was an error parsing the
-   * token or the token is invalid.
+   *     token or the token is invalid.
    */
   public String getUsername(String token) {
     Claims claims = getClaims(token);

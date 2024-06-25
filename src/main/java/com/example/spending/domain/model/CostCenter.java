@@ -17,12 +17,10 @@ import lombok.Setter;
 /**
  * Represents a cost center in the system.
  *
- * <p>
- * A cost center object contains information such as its ID, description, observation, associated
+ * <p>A cost center object contains information such as its ID, description, observation, associated
  * user, and associated titles. This class is annotated with JPA annotations to map it to a database
  * table named "cost_center". The class also uses Lombok annotations such as @Getter and @Setter to
  * generate getter and setter methods for the fields.
- * </p>
  */
 @Getter
 @Setter
