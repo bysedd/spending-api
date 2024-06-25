@@ -13,12 +13,12 @@ public interface TitleRepository extends JpaRepository<Title, Long> {
       nativeQuery = true,
       value =
           """
-          SELECT *
-          FROM public.title
-          WHERE due_date
-                    BETWEEN to_timestamp(:firstPeriod, 'YYYY-MM-DD HH24:MI:SS')
-                    AND to_timestamp(:finalPeriod, 'YYYY-MM-DD HH24:MI:SS');
-                   \s""")
+              SELECT *
+              FROM public.title
+              WHERE due_date
+                        BETWEEN to_timestamp(:firstPeriod, 'YYYY-MM-DD HH24:MI:SS')
+                        AND to_timestamp(:finalPeriod, 'YYYY-MM-DD HH24:MI:SS');
+                       \s""")
   List<Title> getCashFlowByDueDate(
       @Param("firstPeriod") String firstPeriod, @Param("finalPeriod") String finalPeriod);
 
