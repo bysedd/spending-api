@@ -14,9 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-/**
- * This class is responsible for providing CRUD operations for the Cost Center entity.
- */
+/** This class is responsible for providing CRUD operations for the Cost Center entity. */
 @Service
 @AllArgsConstructor
 public class CostCenterService
@@ -41,7 +39,7 @@ public class CostCenterService
    * Creates a CostCenterResponseDto based on the given CostCenterRequestDto and ID.
    *
    * @param dto The CostCenterRequestDto used to create the CostCenterResponseDto.
-   * @param id  The ID of the CostCenter.
+   * @param id The ID of the CostCenter.
    * @return The created CostCenterResponseDto.
    */
   private CostCenterResponseDto getResponseDto(CostCenterRequestDto dto, Long id) {
@@ -77,7 +75,7 @@ public class CostCenterService
    * @param id The ID of the CostCenter.
    * @return The retrieved CostCenterResponseDto.
    * @throws ResourceNotFoundException if the CostCenter is not found or if the user associated with
-   *                                   the CostCenter doesn't match the authenticated user.
+   *     the CostCenter doesn't match the authenticated user.
    */
   @Override
   public CostCenterResponseDto getById(Long id) {
@@ -95,7 +93,7 @@ public class CostCenterService
   /**
    * Updates a CostCenter with the given ID using the provided CostCenterRequestDto.
    *
-   * @param id  The ID of the CostCenter to update.
+   * @param id The ID of the CostCenter to update.
    * @param dto The CostCenterRequestDto containing the updated information.
    * @return The updated CostCenterResponseDto.
    */

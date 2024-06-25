@@ -18,13 +18,11 @@ import lombok.Setter;
 /**
  * Represents a title in the system.
  *
- * <p>
- * A title object contains information such as its ID, description, type, associated user,
+ * <p>A title object contains information such as its ID, description, type, associated user,
  * associated cost centers, value, register date, reference date, due date, payment date, and
  * observation. This class is annotated with JPA annotations to map it to a database table named
  * "title". The class also uses lombok annotations such as @Getter and @Setter to generate getter
  * and setter methods for the fields.
- * </p>
  */
 @Entity
 @Getter

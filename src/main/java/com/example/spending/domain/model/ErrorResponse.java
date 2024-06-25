@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Represents an error response returned by the server.
- */
+/** Represents an error response returned by the server. */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,5 +17,4 @@ public class ErrorResponse {
   private String title;
 
   private String message;
-
 }

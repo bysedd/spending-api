@@ -8,9 +8,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-/**
- * Service class for handling dashboard-related operations.
- */
+/** Service class for handling dashboard-related operations. */
 @Service
 @AllArgsConstructor
 public class DashboardService {
@@ -42,7 +40,8 @@ public class DashboardService {
         totalPayable += title.getValue();
         titlesPayable.add(title);
       } else {
-        // If the title is receivable, add its value to total receivable and add it to receivable titles list
+        // If the title is receivable, add its value to total receivable and add it to receivable
+        // titles list
         totalReceivable += title.getValue();
         titlesReceivable.add(title);
       }
