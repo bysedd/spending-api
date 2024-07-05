@@ -10,7 +10,6 @@ import com.example.spending.dto.title.TitleResponseDto;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,7 +49,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
 
     return titles.stream()
         .map(title -> mapper.map(title, TitleResponseDto.class))
-        .collect(Collectors.toList());
+        .toList();
   }
 
   @Override
@@ -82,7 +81,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
 
     return titles.stream()
         .map(title -> mapper.map(title, TitleResponseDto.class))
-        .collect(Collectors.toList());
+        .toList();
   }
 
   private void validateTitle(TitleRequestDto dto) {

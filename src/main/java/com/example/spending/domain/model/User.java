@@ -40,7 +40,7 @@ public class User implements UserDetails {
   private Date inactivationDate;
 
   @OneToMany(mappedBy = "user")
-  private List<Title> titles;
+  private transient List<Title> titles;
 
   // #region Framework
   @Override

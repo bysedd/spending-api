@@ -9,7 +9,6 @@ import com.example.spending.dto.user.UserResponseDto;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,7 +30,7 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
 
     return users.stream()
         .map(user -> mapper.map(user, UserResponseDto.class))
-        .collect(Collectors.toList());
+        .toList();
   }
 
   @Override
