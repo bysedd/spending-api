@@ -88,11 +88,11 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
   /**
    * Updates a user with the provided ID.
    *
-   * @param id  The ID of the user to update.
+   * @param id The ID of the user to update.
    * @param dto The UserRequestDto object containing the updated user details.
    * @return The UserResponseDto object for the updated user.
    * @throws ResourceBadRequestException if the user is inactivated and cannot be updated.
-   * @throws ResourceNotFoundException   if no user is found with the given ID.
+   * @throws ResourceNotFoundException if no user is found with the given ID.
    */
   @Override
   public UserResponseDto update(Long id, UserRequestDto dto) {
@@ -139,7 +139,7 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
    *
    * @param dto The UserRequestDto object to validate.
    * @throws ResourceBadRequestException if the email or password is null in the UserRequestDto
-   *                                     object.
+   *     object.
    */
   private void validateUser(UserRequestDto dto) {
     if (dto.getEmail() == null || dto.getPassword() == null) {

@@ -75,7 +75,7 @@ public class JwtUtil {
    *
    * @param token The JWT token to extract the email from.
    * @return The email is extracted from the JWT token or null if there was an error parsing the
-   * token or the token is invalid.
+   *     token or the token is invalid.
    */
   public String getUsername(String token) {
     Claims claims = getClaims(token);
