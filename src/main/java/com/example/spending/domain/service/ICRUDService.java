@@ -2,15 +2,15 @@ package com.example.spending.domain.service;
 
 import java.util.List;
 
-public interface ICRUDService<Req, Res> {
+public interface ICRUDService<D, R> {
 
-  Res create(Req dto);
+  R create(D dto);
 
-  List<Res> getAll();
+  List<R> getAll();
 
-  Res getById(Long id);
+  R getById(Long id);
 
-  Res update(Long id, Req dto);
+  R update(Long id, D dto);
 
   void delete(Long id);
 }
