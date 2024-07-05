@@ -14,6 +14,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * UserService class provides implementation for ICRUDService<UserRequestDto, UserResponseDto>. It
+ * allows CRUD operations on User entities.
+ */
 @Service
 @AllArgsConstructor
 public class UserService implements ICRUDService<UserRequestDto, UserResponseDto> {
@@ -24,6 +28,11 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
 
   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+  /**
+   * Retrieves a list of all users.
+   *
+   * @return The list of user response DTOs.
+   */
   @Override
   public List<UserResponseDto> getAll() {
     List<User> users = userRepository.findAll();
@@ -31,6 +40,13 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
     return users.stream().map(user -> mapper.map(user, UserResponseDto.class)).toList();
   }
 
+  /**
+   * Retrieves a UserResponseDto object by the given id.
+   *
+   * @param id The ID of the user.
+   * @return The UserResponseDto object with the matching ID.
+   * @throws ResourceNotFoundException if no user is found with the given ID.
+   */
   @Override
   public UserResponseDto getById(Long id) {
     Optional<User> user = userRepository.findById(id);
@@ -42,6 +58,13 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
     return mapper.map(user.get(), UserResponseDto.class);
   }
 
+  /**
+   * Creates a new user.
+   *
+   * @param dto The UserRequestDto object containing the user details.
+   * @return The UserResponseDto object for the created user.
+   * @throws ResourceBadRequestException if the email provided in the dto is already registered.
+   */
   @Override
   public UserResponseDto create(UserRequestDto dto) {
     validateUser(dto);
@@ -62,6 +85,15 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
     return mapper.map(user, UserResponseDto.class);
   }
 
+  /**
+   * Updates a user with the provided ID.
+   *
+   * @param id  The ID of the user to update.
+   * @param dto The UserRequestDto object containing the updated user details.
+   * @return The UserResponseDto object for the updated user.
+   * @throws ResourceBadRequestException if the user is inactivated and cannot be updated.
+   * @throws ResourceNotFoundException   if no user is found with the given ID.
+   */
   @Override
   public UserResponseDto update(Long id, UserRequestDto dto) {
     UserResponseDto bankUser = getById(id);
@@ -82,6 +114,12 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
     return mapper.map(user, UserResponseDto.class);
   }
 
+  /**
+   * Deletes a user by the provided ID.
+   *
+   * @param id The ID of the user to delete.
+   * @throws ResourceNotFoundException if no user is found with the given ID.
+   */
   @Override
   public void delete(Long id) {
     Optional<User> optionalUser = userRepository.findById(id);
@@ -96,6 +134,13 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
     userRepository.save(user);
   }
 
+  /**
+   * Validates the UserRequestDto object to ensure that the email and password fields are not null.
+   *
+   * @param dto The UserRequestDto object to validate.
+   * @throws ResourceBadRequestException if the email or password is null in the UserRequestDto
+   *                                     object.
+   */
   private void validateUser(UserRequestDto dto) {
     if (dto.getEmail() == null || dto.getPassword() == null) {
       throw new ResourceBadRequestException("Email and password are required");
