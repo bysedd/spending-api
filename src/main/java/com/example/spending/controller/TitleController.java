@@ -41,7 +41,7 @@ public class TitleController implements ICRUDController<TitleRequestDto, TitleRe
   }
 
   @Override
-  public ResponseEntity<?> delete(Long id) {
+  public ResponseEntity<Void> delete(Long id) {
     titleService.delete(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }

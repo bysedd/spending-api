@@ -46,7 +46,7 @@ public class UserController implements ICRUDController<UserRequestDto, UserRespo
   }
 
   @Override
-  public ResponseEntity<?> delete(@PathVariable Long id) {
+  public ResponseEntity<Void> delete(@PathVariable Long id) {
     userService.delete(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
