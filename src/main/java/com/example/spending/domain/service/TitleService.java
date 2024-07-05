@@ -10,7 +10,6 @@ import com.example.spending.dto.title.TitleResponseDto;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,7 +31,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
    * Retrieves the TitleResponseDto for the given TitleRequestDto and ID.
    *
    * @param dto The TitleRequestDto object.
-   * @param id  The ID of the title.
+   * @param id The ID of the title.
    * @return The TitleResponseDto object.
    */
   private TitleResponseDto getResponseDto(TitleRequestDto dto, Long id) {
@@ -97,7 +96,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
   /**
    * Updates a title with the given ID based on the provided TitleRequestDto.
    *
-   * @param id  The ID of the title.
+   * @param id The ID of the title.
    * @param dto The TitleRequestDto object containing the updated information.
    * @return The updated TitleResponseDto object.
    */
@@ -129,9 +128,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
   public List<TitleResponseDto> getByDueDate(String firstPeriod, String finalPeriod) {
     List<Title> titles = titleRepository.getCashFlowByDueDate(firstPeriod, finalPeriod);
 
-    return titles.stream()
-        .map(title -> mapper.map(title, TitleResponseDto.class))
-        .collect(Collectors.toList());
+    return titles.stream().map(title -> mapper.map(title, TitleResponseDto.class)).toList();
   }
 
   /**
@@ -139,7 +136,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
    *
    * @param dto The TitleRequestDto object to validate.
    * @throws ResourceBadRequestException If any of the properties in the TitleRequestDto object are
-   *                                     invalid.
+   *     invalid.
    */
   private void validateTitle(TitleRequestDto dto) {
     if (dto.getType() == null) {

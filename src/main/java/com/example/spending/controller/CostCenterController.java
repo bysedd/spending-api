@@ -42,7 +42,7 @@ public class CostCenterController
   }
 
   @Override
-  public ResponseEntity<?> delete(Long id) {
+  public ResponseEntity<Void> delete(Long id) {
     costCenterService.delete(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }

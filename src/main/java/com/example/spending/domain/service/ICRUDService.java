@@ -2,23 +2,15 @@ package com.example.spending.domain.service;
 
 import java.util.List;
 
-/**
- * This interface represents a CRUD service provides Create, Read, Update, Delete operations. It is
- * generic and can be used with any data transfer object (Req) for creating and updating records and
- * any response object (Res) for retrieving records.
- *
- * @param <Req> The data transfer object for creating and updating records.
- * @param <Res> The response object for retrieving records.
- */
-public interface ICRUDService<Req, Res> {
+public interface ICRUDService<D, R> {
 
-  Res create(Req dto);
+  R create(D dto);
 
-  List<Res> getAll();
+  List<R> getAll();
 
-  Res getById(Long id);
+  R getById(Long id);
 
-  Res update(Long id, Req dto);
+  R update(Long id, D dto);
 
   void delete(Long id);
 }

@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class DateConverter {
 
+  private DateConverter() {}
+
   public static String convertDate(Date date) {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     return sdf.format(date);
