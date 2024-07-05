@@ -47,9 +47,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
   public List<TitleResponseDto> getAll() {
     List<Title> titles = titleRepository.findAll();
 
-    return titles.stream()
-        .map(title -> mapper.map(title, TitleResponseDto.class))
-        .toList();
+    return titles.stream().map(title -> mapper.map(title, TitleResponseDto.class)).toList();
   }
 
   @Override
@@ -79,9 +77,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
   public List<TitleResponseDto> getByDueDate(String firstPeriod, String finalPeriod) {
     List<Title> titles = titleRepository.getCashFlowByDueDate(firstPeriod, finalPeriod);
 
-    return titles.stream()
-        .map(title -> mapper.map(title, TitleResponseDto.class))
-        .toList();
+    return titles.stream().map(title -> mapper.map(title, TitleResponseDto.class)).toList();
   }
 
   private void validateTitle(TitleRequestDto dto) {

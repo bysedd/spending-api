@@ -28,9 +28,7 @@ public class UserService implements ICRUDService<UserRequestDto, UserResponseDto
   public List<UserResponseDto> getAll() {
     List<User> users = userRepository.findAll();
 
-    return users.stream()
-        .map(user -> mapper.map(user, UserResponseDto.class))
-        .toList();
+    return users.stream().map(user -> mapper.map(user, UserResponseDto.class)).toList();
   }
 
   @Override
