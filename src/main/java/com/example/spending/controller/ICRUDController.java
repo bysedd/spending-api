@@ -15,7 +15,7 @@ public interface ICRUDController<D, R> {
   ResponseEntity<List<R>> getAll();
 
   @GetMapping("/{id}")
-  ResponseEntity<List<R>> getById(@PathVariable Long id);
+  ResponseEntity<R> getById(@PathVariable Long id);
 
   @PostMapping
   ResponseEntity<R> create(@RequestBody D dto);

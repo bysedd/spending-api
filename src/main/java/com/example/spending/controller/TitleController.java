@@ -25,8 +25,8 @@ public class TitleController implements ICRUDController<TitleRequestDto, TitleRe
   }
 
   @Override
-  public ResponseEntity<List<TitleResponseDto>> getById(Long id) {
-    return ResponseEntity.ok(List.of(titleService.getById(id)));
+  public ResponseEntity<TitleResponseDto> getById(Long id) {
+    return ResponseEntity.ok(titleService.getById(id));
   }
 
   @Override
