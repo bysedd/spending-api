@@ -26,8 +26,8 @@ public class CostCenterController
   }
 
   @Override
-  public ResponseEntity<List<CostCenterResponseDto>> getById(Long id) {
-    return ResponseEntity.ok(List.of(costCenterService.getById(id)));
+  public ResponseEntity<CostCenterResponseDto> getById(Long id) {
+    return ResponseEntity.ok(costCenterService.getById(id));
   }
 
   @Override

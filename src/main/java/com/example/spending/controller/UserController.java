@@ -3,7 +3,6 @@ package com.example.spending.controller;
 import com.example.spending.domain.service.UserService;
 import com.example.spending.dto.user.UserRequestDto;
 import com.example.spending.dto.user.UserResponseDto;
-import java.util.Collections;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,8 +27,8 @@ public class UserController implements ICRUDController<UserRequestDto, UserRespo
   }
 
   @Override
-  public ResponseEntity<List<UserResponseDto>> getById(@PathVariable Long id) {
-    return ResponseEntity.ok(Collections.singletonList(userService.getById(id)));
+  public ResponseEntity<UserResponseDto> getById(@PathVariable Long id) {
+    return ResponseEntity.ok(userService.getById(id));
   }
 
   @Override

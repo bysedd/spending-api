@@ -31,7 +31,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
    * Retrieves the TitleResponseDto for the given TitleRequestDto and ID.
    *
    * @param dto The TitleRequestDto object.
-   * @param id The ID of the title.
+   * @param id  The ID of the title.
    * @return The TitleResponseDto object.
    */
   private TitleResponseDto getResponseDto(TitleRequestDto dto, Long id) {
@@ -96,7 +96,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
   /**
    * Updates a title with the given ID based on the provided TitleRequestDto.
    *
-   * @param id The ID of the title.
+   * @param id  The ID of the title.
    * @param dto The TitleRequestDto object containing the updated information.
    * @return The updated TitleResponseDto object.
    */
@@ -136,7 +136,7 @@ public class TitleService implements ICRUDService<TitleRequestDto, TitleResponse
    *
    * @param dto The TitleRequestDto object to validate.
    * @throws ResourceBadRequestException If any of the properties in the TitleRequestDto object are
-   *     invalid.
+   *                                     invalid.
    */
   private void validateTitle(TitleRequestDto dto) {
     if (dto.getType() == null) {
